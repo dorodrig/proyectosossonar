@@ -2,7 +2,7 @@ name: Continuous Integration
 on:
   push:
     branches:
-      - master
+      - main
       - develop
   pull_request:
     types: [opened, synchronize, reopened]
@@ -56,4 +56,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=dorodrig_ProyectoSOS -X
+          mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=dorodrig_proyectosossonar -X
