@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="student">
+      <h2 data-cy="studentDetailsHeading"><span ceetTranslate="proyectoSosApp.student.detail.title">Student</span></h2>
+
+      <hr />
+
+      <ceet-alert-error></ceet-alert-error>
+
+      <ceet-alert></ceet-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span ceetTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ student.id }}</span>
+        </dd>
+        <dt><span ceetTranslate="proyectoSosApp.student.attendantName">Attendant Name</span></dt>
+        <dd>
+          <span>{{ student.attendantName }}</span>
+        </dd>
+        <dt><span ceetTranslate="proyectoSosApp.student.kin">Kin</span></dt>
+        <dd>
+          <span>{{ student.kin }}</span>
+        </dd>
+        <dt><span ceetTranslate="proyectoSosApp.student.enrollment">Enrollment</span></dt>
+        <dd>
+          <div *ngIf="student.enrollment">
+            <a [routerLink]="['/enrollment', student.enrollment?.id, 'view']">{{ student.enrollment?.id }}</a>
+          </div>
+        </dd>
+        <dt><span ceetTranslate="proyectoSosApp.student.user">User</span></dt>
+        <dd>
+          <span>{{ student.user?.id }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span ceetTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/student', student.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span ceetTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

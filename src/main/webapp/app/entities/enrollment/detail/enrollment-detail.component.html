@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="enrollment">
+      <h2 data-cy="enrollmentDetailsHeading"><span ceetTranslate="proyectoSosApp.enrollment.detail.title">Enrollment</span></h2>
+
+      <hr />
+
+      <ceet-alert-error></ceet-alert-error>
+
+      <ceet-alert></ceet-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span ceetTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ enrollment.id }}</span>
+        </dd>
+        <dt><span ceetTranslate="proyectoSosApp.enrollment.registrationNumber">Registration Number</span></dt>
+        <dd>
+          <span>{{ enrollment.registrationNumber }}</span>
+        </dd>
+        <dt><span ceetTranslate="proyectoSosApp.enrollment.startDate">Start Date</span></dt>
+        <dd>
+          <span>{{ enrollment.startDate | formatMediumDatetime }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span ceetTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/enrollment', enrollment.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span ceetTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

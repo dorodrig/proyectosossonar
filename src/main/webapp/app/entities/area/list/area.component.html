@@ -1,0 +1,88 @@
+<div>
+  <h2 id="page-heading" data-cy="AreaHeading">
+    <span ceetTranslate="proyectoSosApp.area.home.title">Areas</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span ceetTranslate="proyectoSosApp.area.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-area"
+        [routerLink]="['/area/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span ceetTranslate="proyectoSosApp.area.home.createLabel"> Create a new Area </span>
+      </button>
+    </div>
+  </h2>
+
+  <ceet-alert-error></ceet-alert-error>
+
+  <ceet-alert></ceet-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="areas?.length === 0">
+    <span ceetTranslate="proyectoSosApp.area.home.notFound">No areas found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="areas && areas.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr ceetSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" ceetSortBy="id"><span ceetTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" ceetSortBy="areaName">
+            <span ceetTranslate="proyectoSosApp.area.areaName">Area Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let area of areas; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/area', area.id, 'view']">{{ area.id }}</a>
+          </td>
+          <td>{{ area.areaName }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/area', area.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" ceetTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/area', area.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" ceetTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(area)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" ceetTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="areas && areas.length > 0">
+    <div class="d-flex justify-content-center">
+      <ceet-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></ceet-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

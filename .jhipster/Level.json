@@ -1,0 +1,43 @@
+{
+  "applications": ["proyectoSOS"],
+  "changelogDate": "20221109010506",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "level",
+  "fields": [
+    {
+      "fieldName": "nameCurse",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "10"
+    },
+    {
+      "fieldName": "courseAcronym",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "10"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Level",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "enrollment",
+      "otherEntityRelationshipName": "level",
+      "ownerSide": true,
+      "relationshipName": "enrollment",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "area",
+      "otherEntityRelationshipName": "level",
+      "ownerSide": false,
+      "relationshipName": "area",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

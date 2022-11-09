@@ -1,0 +1,30 @@
+{
+  "proyectoSosApp": {
+    "teacher": {
+      "home": {
+        "title": "Teachers",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Teacher",
+        "createOrEditLabel": "Crear o editar Teacher",
+        "notFound": "Ningún Teachers encontrado"
+      },
+      "created": "Un nuevo Teacher ha sido creado con el identificador {{ param }}",
+      "updated": "Un Teacher ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Teacher ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Teacher {{ id }}?"
+      },
+      "detail": {
+        "title": "Teacher"
+      },
+      "id": "ID",
+      "name": "Name",
+      "lastName": "Last Name",
+      "phone": "Phone",
+      "address": "Address",
+      "documentNumber": "Document Number",
+      "documentType": "Document Type",
+      "user": "User"
+    }
+  }
+}

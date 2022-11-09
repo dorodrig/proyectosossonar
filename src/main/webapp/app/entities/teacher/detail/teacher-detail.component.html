@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="teacher">
+      <h2 data-cy="teacherDetailsHeading"><span ceetTranslate="proyectoSosApp.teacher.detail.title">Teacher</span></h2>
+
+      <hr />
+
+      <ceet-alert-error></ceet-alert-error>
+
+      <ceet-alert></ceet-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span ceetTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ teacher.id }}</span>
+        </dd>
+        <dt><span ceetTranslate="proyectoSosApp.teacher.name">Name</span></dt>
+        <dd>
+          <span>{{ teacher.name }}</span>
+        </dd>
+        <dt><span ceetTranslate="proyectoSosApp.teacher.lastName">Last Name</span></dt>
+        <dd>
+          <span>{{ teacher.lastName }}</span>
+        </dd>
+        <dt><span ceetTranslate="proyectoSosApp.teacher.phone">Phone</span></dt>
+        <dd>
+          <span>{{ teacher.phone }}</span>
+        </dd>
+        <dt><span ceetTranslate="proyectoSosApp.teacher.address">Address</span></dt>
+        <dd>
+          <span>{{ teacher.address }}</span>
+        </dd>
+        <dt><span ceetTranslate="proyectoSosApp.teacher.documentNumber">Document Number</span></dt>
+        <dd>
+          <span>{{ teacher.documentNumber }}</span>
+        </dd>
+        <dt><span ceetTranslate="proyectoSosApp.teacher.documentType">Document Type</span></dt>
+        <dd>
+          <span>{{ teacher.documentType }}</span>
+        </dd>
+        <dt><span ceetTranslate="proyectoSosApp.teacher.user">User</span></dt>
+        <dd>
+          <span>{{ teacher.user?.id }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span ceetTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/teacher', teacher.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span ceetTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+{
+  "applications": ["proyectoSOS"],
+  "changelogDate": "20221109010806",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "achievement",
+  "fields": [
+    {
+      "fieldName": "achievementDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "statusAchievement",
+      "fieldType": "StateAchievement",
+      "fieldValues": "Active (fortaleza),Inactive (debilidad)"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Achievement",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "course",
+      "otherEntityRelationshipName": "achievement",
+      "ownerSide": true,
+      "relationshipName": "course",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

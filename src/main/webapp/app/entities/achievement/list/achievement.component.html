@@ -1,0 +1,105 @@
+<div>
+  <h2 id="page-heading" data-cy="AchievementHeading">
+    <span ceetTranslate="proyectoSosApp.achievement.home.title">Achievements</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span ceetTranslate="proyectoSosApp.achievement.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-achievement"
+        [routerLink]="['/achievement/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span ceetTranslate="proyectoSosApp.achievement.home.createLabel"> Create a new Achievement </span>
+      </button>
+    </div>
+  </h2>
+
+  <ceet-alert-error></ceet-alert-error>
+
+  <ceet-alert></ceet-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="achievements?.length === 0">
+    <span ceetTranslate="proyectoSosApp.achievement.home.notFound">No achievements found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="achievements && achievements.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr ceetSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" ceetSortBy="id"><span ceetTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" ceetSortBy="achievementDescription">
+            <span ceetTranslate="proyectoSosApp.achievement.achievementDescription">Achievement Description</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" ceetSortBy="statusAchievement">
+            <span ceetTranslate="proyectoSosApp.achievement.statusAchievement">Status Achievement</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let achievement of achievements; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/achievement', achievement.id, 'view']">{{ achievement.id }}</a>
+          </td>
+          <td>{{ achievement.achievementDescription }}</td>
+          <td ceetTranslate="{{ 'proyectoSosApp.StateAchievement.' + achievement.statusAchievement }}">
+            {{ achievement.statusAchievement }}
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/achievement', achievement.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" ceetTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/achievement', achievement.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" ceetTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(achievement)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" ceetTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="achievements && achievements.length > 0">
+    <div class="d-flex justify-content-center">
+      <ceet-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></ceet-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

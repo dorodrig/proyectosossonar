@@ -1,0 +1,39 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="course">
+      <h2 data-cy="courseDetailsHeading"><span ceetTranslate="proyectoSosApp.course.detail.title">Course</span></h2>
+
+      <hr />
+
+      <ceet-alert-error></ceet-alert-error>
+
+      <ceet-alert></ceet-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span ceetTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ course.id }}</span>
+        </dd>
+        <dt><span ceetTranslate="proyectoSosApp.course.nameCourse">Name Course</span></dt>
+        <dd>
+          <span>{{ course.nameCourse }}</span>
+        </dd>
+        <dt><span ceetTranslate="proyectoSosApp.course.area">Area</span></dt>
+        <dd>
+          <span *ngFor="let area of course.areas; let last = last">
+            <a [routerLink]="['/area', area?.id, 'view']">{{ area.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span ceetTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/course', course.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span ceetTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

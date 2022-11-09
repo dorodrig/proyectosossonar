@@ -1,0 +1,37 @@
+{
+  "applications": ["proyectoSOS"],
+  "changelogDate": "20221109010606",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "area",
+  "fields": [
+    {
+      "fieldName": "areaName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "30"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Area",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "level",
+      "otherEntityRelationshipName": "area",
+      "ownerSide": true,
+      "relationshipName": "level",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "course",
+      "otherEntityRelationshipName": "area",
+      "ownerSide": false,
+      "relationshipName": "course",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

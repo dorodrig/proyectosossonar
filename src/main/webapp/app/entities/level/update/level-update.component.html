@@ -1,0 +1,108 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="ceet-level-heading" data-cy="LevelCreateUpdateHeading" ceetTranslate="proyectoSosApp.level.home.createOrEditLabel">
+        Create or edit a Level
+      </h2>
+
+      <div>
+        <ceet-alert-error></ceet-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" ceetTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" ceetTranslate="proyectoSosApp.level.nameCurse" for="field_nameCurse">Name Curse</label>
+          <input type="text" class="form-control" name="nameCurse" id="field_nameCurse" data-cy="nameCurse" formControlName="nameCurse" />
+          <div *ngIf="editForm.get('nameCurse')!.invalid && (editForm.get('nameCurse')!.dirty || editForm.get('nameCurse')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nameCurse')?.errors?.required"
+              ceetTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nameCurse')?.errors?.maxlength"
+              ceetTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 10 }"
+            >
+              This field cannot be longer than 10 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" ceetTranslate="proyectoSosApp.level.courseAcronym" for="field_courseAcronym">Course Acronym</label>
+          <input
+            type="text"
+            class="form-control"
+            name="courseAcronym"
+            id="field_courseAcronym"
+            data-cy="courseAcronym"
+            formControlName="courseAcronym"
+          />
+          <div
+            *ngIf="
+              editForm.get('courseAcronym')!.invalid && (editForm.get('courseAcronym')!.dirty || editForm.get('courseAcronym')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('courseAcronym')?.errors?.required"
+              ceetTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('courseAcronym')?.errors?.maxlength"
+              ceetTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 10 }"
+            >
+              This field cannot be longer than 10 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label ceetTranslate="proyectoSosApp.level.enrollment" for="field_enrollments">Enrollment</label>
+          <select
+            class="form-control"
+            id="field_enrollments"
+            data-cy="enrollment"
+            multiple
+            name="enrollments"
+            formControlName="enrollments"
+          >
+            <option
+              [ngValue]="getSelectedEnrollment(enrollmentOption, editForm.get('enrollments')!.value)"
+              *ngFor="let enrollmentOption of enrollmentsSharedCollection; trackBy: trackEnrollmentById"
+            >
+              {{ enrollmentOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span ceetTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span ceetTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

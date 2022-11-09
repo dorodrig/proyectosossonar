@@ -1,0 +1,39 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="area">
+      <h2 data-cy="areaDetailsHeading"><span ceetTranslate="proyectoSosApp.area.detail.title">Area</span></h2>
+
+      <hr />
+
+      <ceet-alert-error></ceet-alert-error>
+
+      <ceet-alert></ceet-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span ceetTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ area.id }}</span>
+        </dd>
+        <dt><span ceetTranslate="proyectoSosApp.area.areaName">Area Name</span></dt>
+        <dd>
+          <span>{{ area.areaName }}</span>
+        </dd>
+        <dt><span ceetTranslate="proyectoSosApp.area.level">Level</span></dt>
+        <dd>
+          <span *ngFor="let level of area.levels; let last = last">
+            <a [routerLink]="['/level', level?.id, 'view']">{{ level.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span ceetTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/area', area.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span ceetTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

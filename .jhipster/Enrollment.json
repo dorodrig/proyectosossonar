@@ -1,0 +1,41 @@
+{
+  "applications": ["proyectoSOS"],
+  "changelogDate": "20221109010406",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "enrollment",
+  "fields": [
+    {
+      "fieldName": "registrationNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Enrollment",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "student",
+      "otherEntityRelationshipName": "enrollment",
+      "ownerSide": false,
+      "relationshipName": "student",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "level",
+      "otherEntityRelationshipName": "enrollment",
+      "ownerSide": false,
+      "relationshipName": "level",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

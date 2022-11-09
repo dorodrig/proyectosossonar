@@ -1,0 +1,104 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="ceet-achievement-heading"
+        data-cy="AchievementCreateUpdateHeading"
+        ceetTranslate="proyectoSosApp.achievement.home.createOrEditLabel"
+      >
+        Create or edit a Achievement
+      </h2>
+
+      <div>
+        <ceet-alert-error></ceet-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" ceetTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" ceetTranslate="proyectoSosApp.achievement.achievementDescription" for="field_achievementDescription"
+            >Achievement Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="achievementDescription"
+            id="field_achievementDescription"
+            data-cy="achievementDescription"
+            formControlName="achievementDescription"
+          />
+          <div
+            *ngIf="
+              editForm.get('achievementDescription')!.invalid &&
+              (editForm.get('achievementDescription')!.dirty || editForm.get('achievementDescription')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('achievementDescription')?.errors?.required"
+              ceetTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('achievementDescription')?.errors?.maxlength"
+              ceetTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 500 }"
+            >
+              This field cannot be longer than 500 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" ceetTranslate="proyectoSosApp.achievement.statusAchievement" for="field_statusAchievement"
+            >Status Achievement</label
+          >
+          <select
+            class="form-control"
+            name="statusAchievement"
+            formControlName="statusAchievement"
+            id="field_statusAchievement"
+            data-cy="statusAchievement"
+          >
+            <option [ngValue]="null">{{ 'proyectoSosApp.StateAchievement.null' | translate }}</option>
+            <option *ngFor="let stateAchievement of stateAchievementValues" [value]="stateAchievement">
+              {{ 'proyectoSosApp.StateAchievement.' + stateAchievement | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label ceetTranslate="proyectoSosApp.achievement.course" for="field_courses">Course</label>
+          <select class="form-control" id="field_courses" data-cy="course" multiple name="courses" formControlName="courses">
+            <option
+              [ngValue]="getSelectedCourse(courseOption, editForm.get('courses')!.value)"
+              *ngFor="let courseOption of coursesSharedCollection; trackBy: trackCourseById"
+            >
+              {{ courseOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span ceetTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span ceetTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+{
+  "applications": ["proyectoSOS"],
+  "changelogDate": "20221109010706",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "course",
+  "fields": [
+    {
+      "fieldName": "nameCourse",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "30"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Course",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "area",
+      "otherEntityRelationshipName": "course",
+      "ownerSide": true,
+      "relationshipName": "area",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "achievement",
+      "otherEntityRelationshipName": "course",
+      "ownerSide": false,
+      "relationshipName": "achievement",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "note",
+      "otherEntityRelationshipName": "course",
+      "ownerSide": false,
+      "relationshipName": "note",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

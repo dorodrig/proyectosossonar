@@ -1,0 +1,43 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="level">
+      <h2 data-cy="levelDetailsHeading"><span ceetTranslate="proyectoSosApp.level.detail.title">Level</span></h2>
+
+      <hr />
+
+      <ceet-alert-error></ceet-alert-error>
+
+      <ceet-alert></ceet-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span ceetTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ level.id }}</span>
+        </dd>
+        <dt><span ceetTranslate="proyectoSosApp.level.nameCurse">Name Curse</span></dt>
+        <dd>
+          <span>{{ level.nameCurse }}</span>
+        </dd>
+        <dt><span ceetTranslate="proyectoSosApp.level.courseAcronym">Course Acronym</span></dt>
+        <dd>
+          <span>{{ level.courseAcronym }}</span>
+        </dd>
+        <dt><span ceetTranslate="proyectoSosApp.level.enrollment">Enrollment</span></dt>
+        <dd>
+          <span *ngFor="let enrollment of level.enrollments; let last = last">
+            <a [routerLink]="['/enrollment', enrollment?.id, 'view']">{{ enrollment.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span ceetTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/level', level.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span ceetTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
