@@ -19,6 +19,7 @@ import tech.jhipster.async.ExceptionHandlingAsyncTaskExecutor;
 @EnableScheduling
 public class AsyncConfiguration implements AsyncConfigurer {
 
+    //java
     private final Logger log = LoggerFactory.getLogger(AsyncConfiguration.class);
 
     private final TaskExecutionProperties taskExecutionProperties;
